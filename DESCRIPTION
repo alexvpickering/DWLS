@@ -12,3 +12,5 @@ Packaged: 2018-11-25 01:00:00 UTC; qzhu
 NeedsCompilation: no
 Repository: CRAN
 Date/Publication: 2018-11-25 01:00:00
+RoxygenNote: 7.2.2
+Encoding: UTF-8

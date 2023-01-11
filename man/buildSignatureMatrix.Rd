@@ -4,16 +4,25 @@
 \alias{buildSignatureMatrix}
 \title{Build Signature Matrix}
 \usage{
-buildSignatureMatrix(scdata, markers, diff.cutoff = 0.5, pval.cutoff = 0.01)
+buildSignatureMatrix(
+  scdata,
+  id,
+  markers,
+  diff.cutoff = 0.5,
+  pval.cutoff = 0.01
+)
 }
 \arguments{
 \item{scdata}{single-cell RNA-seq count matrix}
 
-\item{markers}{list of named data.frames with markers genes for each cluster}
+\item{id}{cluster assignment}
 
-\item{diff.cutoff}{minimum log2FC value}
+\item{markers}{list of data.frames with markers genes for each cluster with columns
+'avg_log2FC' and 'p_val_adj' and \code{row.names} as gene symbols.}
 
-\item{pval.cutoff}{minimum FDR value}
+\item{diff.cutoff}{minimum 'avg_log2FC' value}
+
+\item{pval.cutoff}{minimum 'p_val_adj' value}
 }
 \value{
 signature for to be used for \code{solveDampenedWLS}

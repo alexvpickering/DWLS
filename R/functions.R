@@ -142,7 +142,8 @@ findDampeningConstant <- function(S, B, goldStandard) {
       set.seed(seeds[i])  #make nondeterministic
       subset <- sample(length(ws), size = length(ws) * 0.5)  #randomly select half of gene set
       # solve dampened weighted least squares for subset
-      fit = lm(B[subset] ~ -1 + S[subset, ], weights = wsDampened[subset])
+      weights <- wsDampened[subset]
+      fit <- lm.wfit(S[subset, ], B[subset], w = weights)
       sol <- fit$coef * sum(goldStandard)/sum(fit$coef)
       solutions <- cbind(solutions, sol)
     }

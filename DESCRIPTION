@@ -17,6 +17,7 @@ Imports:
     quadprog,
     e1071,
     parallel,
+    Matrix,
 Suggests: 
     knitr,
     rmarkdown,

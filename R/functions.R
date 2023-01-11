@@ -261,6 +261,13 @@ buildSignatureMatrix <- function(scdata, id, markers, diff.cutoff = 0.5, pval.cu
     numberofGenes <- c(numberofGenes, length(DEGenes[nonMir]))
   }
 
+  # gene means for each cluster
+  clusterMeans <- lapply(unique(id), function(cluster) {
+    Matrix::rowMeans(scdata[, id == cluster])
+  })
+
+  names(clusterMeans) <- unique(id)
+
   # need to reduce number of genes for each subset, order significant genes by decreasing fold change, choose between 50 and 200 genes
   # choose matrix with lowest condition number
   conditionNumbers <- c()
@@ -279,10 +286,9 @@ buildSignatureMatrix <- function(scdata, id, markers, diff.cutoff = 0.5, pval.cu
     }
     Genes <- unique(Genes)
     # make signature matrix
-    ExprSubset <- scdata[Genes, ]
     Sig <- NULL
     for (i in unique(id)) {
-      Sig <- cbind(Sig, (apply(ExprSubset, 1, function(y) mean(y[which(id == i)]))))
+      Sig <- cbind(Sig, clusterMeans[[i]][Genes])
     }
     colnames(Sig) <- unique(id)
     conditionNumbers <- c(conditionNumbers, kappa(Sig))
@@ -302,10 +308,9 @@ buildSignatureMatrix <- function(scdata, id, markers, diff.cutoff = 0.5, pval.cu
     j = j + 1
   }
   Genes <- unique(Genes)
-  ExprSubset <- scdata[Genes, ]
   Sig <- NULL
   for (i in unique(id)) {
-    Sig <- cbind(Sig, (apply(ExprSubset, 1, function(y) mean(y[which(id == i)]))))
+    Sig <- cbind(Sig, clusterMeans[[i]][Genes])
   }
   colnames(Sig) <- unique(id)
   return(Sig)

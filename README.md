@@ -4,14 +4,14 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Forked from https://bitbucket.org/yuanlab/dwls/src/master/ and modified for speed.
+Forked from https://bitbucket.org/yuanlab/dwls/src/master and modified for speed.
 
 ## Installation
 
 You can install the development version of DWLS like so:
 
 ``` r
-remotes::install_github('alexvpickering/dwls')
+remotes::install_github('alexvpickering/DWLS')
 ```
 
 ## Example
